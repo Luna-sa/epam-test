@@ -1,0 +1,4 @@
+flowerId,name,type,description,flowerCount,pricePerFlowerUah,imageUrl,roseLength,closedFlowerCount
+1,A usual bouquet,iris,Cheap and beautiful,7,20,https://florina.kh.ua/image/cache/catalog/cvety-kharkov/dostavka-irisov-kharkov/irisy-vesennyaya-progulka-360x360.jpg,,
+2,A hundred red roses,rose,A nice way to waste money,100,30,https://florina.kh.ua/image/cache/catalog/categories/rozy-300x300.jpg,short,
+3,Lily for love,lily,It's good for you,15,25,https://florina.kh.ua/image/cache/catalog/cvety-kharkov/dostavka-lilij-kharkov/lilii-vzaimnost-360x360.jpg,,5
