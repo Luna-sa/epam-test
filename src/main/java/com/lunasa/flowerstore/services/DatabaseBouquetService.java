@@ -34,7 +34,7 @@ public class DatabaseBouquetService implements BouquetService {
             List<Bouquet> bouquets = new ArrayList<>();
             while (rs.next()) {
                 BouquetData data = new BouquetData();
-                data.setFlowerId(rs.getString("flowerId"));
+                data.setBouquetId(rs.getString("bouquetId"));
                 data.setName(rs.getString("name"));
                 data.setType(rs.getString("type"));
                 data.setDescription(rs.getString("description"));

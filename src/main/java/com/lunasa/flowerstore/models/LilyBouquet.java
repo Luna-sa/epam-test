@@ -4,8 +4,8 @@ public class LilyBouquet extends Bouquet {
 
     protected int closedFlowerCount;
 
-    public LilyBouquet(String flowerId, String name, String description, int flowerCount, int pricePerFlowerUah, int closedFlowerCount, String imageUrl) {
-        super(flowerId, name, "lily", description, flowerCount, pricePerFlowerUah, imageUrl);
+    public LilyBouquet(String bouquetId, String name, String description, int flowerCount, int pricePerFlowerUah, int closedFlowerCount, String imageUrl) {
+        super(bouquetId, name, "lily", description, flowerCount, pricePerFlowerUah, imageUrl);
 
         this.closedFlowerCount = closedFlowerCount;
     }

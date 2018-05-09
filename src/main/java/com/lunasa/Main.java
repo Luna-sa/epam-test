@@ -2,17 +2,43 @@ package com.lunasa;
 
 import com.lunasa.algorithms.StringFinder;
 import com.lunasa.calculator.ConsoleCalculator;
-import com.lunasa.flowerstore.services.DatabaseBouquetService;
+import com.lunasa.flowerstore.AppRunner;
+import com.lunasa.flowerstore.services.*;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-//        System.out.println(new FileBouquetService().getAllBouquets());
-//        System.out.println(new DatabaseBouquetService().getAllBouquets());
+    public static void main(String[] args) {
+//        runTask1_1();
+//        runTask1_2();
+//        runTask2();
+//        runTask3_and_4_1();
+//        runTask3_and_4_2();
+    }
 
+    public static void runTask3_and_4_2() {
+        BouquetService bouquetService = new DatabaseBouquetService();
+        PaymentService paymentService = new TestPaymentService();
+        StoreService storeService = new InMemoryStoreService(bouquetService, paymentService);
+        AppRunner runner = new AppRunner(storeService);
+        runner.run();
+    }
+
+    public static void runTask3_and_4_1() {
+        BouquetService bouquetService = new FileBouquetService();
+        PaymentService paymentService = new TestPaymentService();
+        StoreService storeService = new InMemoryStoreService(bouquetService, paymentService);
+        AppRunner runner = new AppRunner(storeService);
+        runner.run();
+    }
+
+    public static void runTask2() {
+        BouquetService bouquetService = new InMemoryBouquetService();
+        PaymentService paymentService = new TestPaymentService();
+        StoreService storeService = new InMemoryStoreService(bouquetService, paymentService);
+        AppRunner runner = new AppRunner(storeService);
+        runner.run();
     }
 
     // Calculator

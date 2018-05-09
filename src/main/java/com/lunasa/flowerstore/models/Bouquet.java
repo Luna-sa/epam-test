@@ -2,7 +2,7 @@ package com.lunasa.flowerstore.models;
 
 public class Bouquet {
 
-    protected String flowerId;
+    protected String bouquetId;
     protected String name;
     protected String type;
     protected String description;
@@ -10,8 +10,8 @@ public class Bouquet {
     protected int pricePerFlowerUah;
     protected String imageUrl;
 
-    public Bouquet(String flowerId, String name, String type, String description, int flowerCount, int pricePerFlowerUah, String imageUrl) {
-        this.flowerId = flowerId;
+    public Bouquet(String bouquetId, String name, String type, String description, int flowerCount, int pricePerFlowerUah, String imageUrl) {
+        this.bouquetId = bouquetId;
         this.name = name;
         this.type = type;
         this.description = description;
@@ -24,8 +24,8 @@ public class Bouquet {
         return flowerCount * pricePerFlowerUah;
     }
 
-    public String getFlowerId() {
-        return flowerId;
+    public String getBouquetId() {
+        return bouquetId;
     }
 
     public String getName() {

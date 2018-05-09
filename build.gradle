@@ -7,6 +7,10 @@ apply plugin: 'application'
 mainClassName = "com.lunasa.Main"
 sourceCompatibility = 1.8
 
+run {
+    standardInput = System.in
+}
+
 repositories {
     mavenCentral()
 }

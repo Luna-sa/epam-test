@@ -1,6 +1,6 @@
 [
   {
-    "bouquetId": "1",
+    "flowerId": "1",
     "name": "A usual bouquet",
     "type": "iris",
     "description": "Cheap and beautiful",
@@ -9,7 +9,7 @@
     "imageUrl": "https://florina.kh.ua/image/cache/catalog/cvety-kharkov/dostavka-irisov-kharkov/irisy-vesennyaya-progulka-360x360.jpg"
   },
   {
-    "bouquetId": "2",
+    "flowerId": "2",
     "name": "A hundred red roses",
     "type": "rose",
     "description": "A nice way to waste money",
@@ -19,10 +19,10 @@
     "roseLength": "short"
   },
   {
-    "bouquetId": "3",
+    "flowerId": "3",
     "name": "Lily for love",
     "type": "lily",
-    "description": "It is good for you",
+    "description": "It's good for you",
     "flowerCount": 15,
     "pricePerFlowerUah": 25,
     "imageUrl": "https://florina.kh.ua/image/cache/catalog/cvety-kharkov/dostavka-lilij-kharkov/lilii-vzaimnost-360x360.jpg",

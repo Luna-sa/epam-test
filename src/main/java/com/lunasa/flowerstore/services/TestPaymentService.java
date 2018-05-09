@@ -6,7 +6,7 @@ public class TestPaymentService implements PaymentService {
 
     @Override
     public void chargeCreditCardForUser(String userId, int priceUah) {
-        if (userId == "vasya") {
+        if ("vasya".equals(userId)) {
             throw new InsufficientFundsException(userId);
         }
     }

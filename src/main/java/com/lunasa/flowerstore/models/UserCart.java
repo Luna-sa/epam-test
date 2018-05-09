@@ -7,6 +7,10 @@ public class UserCart {
 
     private List<BouquetSupply> bouquetsSupply = new ArrayList<>();
 
+    public List<BouquetSupply> getBouquets() {
+        return bouquetsSupply;
+    }
+
     public void add(Bouquet bouquet, int count) {
         bouquetsSupply.add(new BouquetSupply(bouquet, count));
     }

@@ -1,8 +1,12 @@
 package com.lunasa.flowerstore.services;
 
+import com.lunasa.flowerstore.exceptions.NoCartException;
+import com.lunasa.flowerstore.exceptions.UnknownBouquetException;
 import com.lunasa.flowerstore.models.Bouquet;
+import com.lunasa.flowerstore.models.BouquetSupply;
 import com.lunasa.flowerstore.models.UserCart;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,13 +15,15 @@ import java.util.Map;
 public class InMemoryStoreService implements StoreService {
 
     private BouquetService bouquetService;
+
+    public InMemoryStoreService(BouquetService bouquetService, PaymentService paymentService) {
+        this.bouquetService = bouquetService;
+        this.paymentService = paymentService;
+    }
+
     private PaymentService paymentService;
 
     private Map<String, UserCart> userCarts = new HashMap<>();
-
-    public InMemoryStoreService(PaymentService paymentService) {
-        this.paymentService = paymentService;
-    }
 
     @Override
     public List<Bouquet> getAllBouquets() {
@@ -37,8 +43,20 @@ public class InMemoryStoreService implements StoreService {
         return sameTypeBouquets;
     }
 
+    private Bouquet findBouquetForId(String bouquetId) {
+        List<Bouquet> allBouquets = bouquetService.getAllBouquets();
+        for (int i = 0; i < allBouquets.size(); i++) {
+            Bouquet b = allBouquets.get(i);
+            if (b.getBouquetId().equals(bouquetId)) {
+                return b;
+            }
+        }
+        throw new UnknownBouquetException(bouquetId);
+    }
+
     @Override
-    public void addFlowerToCart(String userId, Bouquet bouquet, int count) {
+    public void addBouquetToCart(String userId, String bouquetId, int count) {
+        Bouquet bouquet = findBouquetForId(bouquetId);
         UserCart userCart = userCarts.get(userId);
         if (userCart == null) {
             userCart = new UserCart();
@@ -48,11 +66,19 @@ public class InMemoryStoreService implements StoreService {
     }
 
     @Override
+    public List<BouquetSupply> getBouquetsFromCart(String userId) {
+        UserCart userCart = userCarts.get(userId);
+        if (userCart == null) {
+            return new ArrayList();
+        }
+        return userCart.getBouquets();
+    }
+
+    @Override
     public void buyFromCart(String userId) {
         UserCart userCart = userCarts.get(userId);
         if (userCart == null) {
-            userCart = new UserCart();
-            userCarts.put(userId, userCart);
+            throw new NoCartException(userId);
         }
         int totalPriceUah = userCart.calculateTotalPrice();
         paymentService.chargeCreditCardForUser(userId, totalPriceUah);

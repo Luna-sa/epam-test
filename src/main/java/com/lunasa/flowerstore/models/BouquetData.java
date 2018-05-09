@@ -5,7 +5,7 @@ import com.lunasa.flowerstore.exceptions.UnknownBouquetException;
 public class BouquetData {
 
     // General bouquet
-    private String flowerId;
+    private String bouquetId;
     private String name;
     private String type;
     private String description;
@@ -20,22 +20,22 @@ public class BouquetData {
     public Bouquet convertToBouquet() {
         switch (type) {
             case "rose":
-                return new RoseBouquet(flowerId, name, description, flowerCount, pricePerFlowerUah, roseLength, imageUrl);
+                return new RoseBouquet(bouquetId, name, description, flowerCount, pricePerFlowerUah, roseLength, imageUrl);
             case "lily":
-                return new LilyBouquet(flowerId, name, description, flowerCount, pricePerFlowerUah, closedFlowerCount, imageUrl);
+                return new LilyBouquet(bouquetId, name, description, flowerCount, pricePerFlowerUah, closedFlowerCount, imageUrl);
             case "tulip":
             case "iris":
-                return new Bouquet(flowerId, name, type, description, flowerCount, pricePerFlowerUah, imageUrl);
+                return new Bouquet(bouquetId, name, type, description, flowerCount, pricePerFlowerUah, imageUrl);
             default: throw new UnknownBouquetException(type);
         }
     }
 
-    public String getFlowerId() {
-        return flowerId;
+    public String getBouquetId() {
+        return bouquetId;
     }
 
-    public void setFlowerId(String flowerId) {
-        this.flowerId = flowerId;
+    public void setBouquetId(String bouquetId) {
+        this.bouquetId = bouquetId;
     }
 
     public String getName() {
