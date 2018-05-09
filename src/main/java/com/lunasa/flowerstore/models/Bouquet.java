@@ -40,6 +40,14 @@ public class Bouquet {
         return description;
     }
 
+    public int getFlowerCount() {
+        return flowerCount;
+    }
+
+    public int getPricePerFlowerUah() {
+        return pricePerFlowerUah;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }

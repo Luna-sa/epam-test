@@ -4,13 +4,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lunasa.flowerstore.services.StoreService;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AppRunner {
 
-    private static final Pattern exp = Pattern.compile("^\\s*([labc])\\s*(\\w+)?\\s*(\\d+)?\\s*(\\d+)?\\s*$");
+    private static final Pattern exp = Pattern.compile("^\\s*([labce])\\s*([^\\s]+)?\\s*(\\d+)?\\s*(\\d+)?\\s*$");
 
     private StoreService storeService;
 
@@ -31,6 +32,12 @@ public class AppRunner {
         } else {
             printObject(storeService.getAllBouquetsOfType(type));
         }
+    }
+
+    private void exportBouquets(Matcher m) throws IOException {
+        String fileName = m.group(2);
+        storeService.exportAllBouquets(fileName);
+        System.out.println("Successfully exported bouquets");
     }
 
     private void addToCart(Matcher m) {
@@ -62,6 +69,7 @@ public class AppRunner {
         System.out.println("Available commands:");
         System.out.println("- List all bouquets: l");
         System.out.println("- List all bouquets of type 'rose': l rose");
+        System.out.println("- Export all bouquets to file 'file.json': e file.json");
         System.out.println("- Add to cart for user 'vasya' 3 flowers with ID '1': a vasya 1 3");
         System.out.println("- View cart for user 'vasya': c vasya");
         System.out.println("- Buy the cart for user 'vasya': b vasya");
@@ -75,6 +83,9 @@ public class AppRunner {
                     switch(m.group(1)) {
                         case "l":
                             listBouquets(m);
+                            break;
+                        case "e":
+                            exportBouquets(m);
                             break;
                         case "a":
                             addToCart(m);

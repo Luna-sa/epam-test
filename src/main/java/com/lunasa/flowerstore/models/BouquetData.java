@@ -1,6 +1,7 @@
 package com.lunasa.flowerstore.models;
 
 import com.lunasa.flowerstore.exceptions.UnknownBouquetException;
+import com.lunasa.flowerstore.exceptions.UnknownBouquetTypeException;
 
 public class BouquetData {
 
@@ -17,6 +18,26 @@ public class BouquetData {
     // Rose bouquet
     private String roseLength;
 
+    public static BouquetData convertFromBouquet(Bouquet bouquet) {
+        BouquetData b = new BouquetData();
+        b.setBouquetId(bouquet.getBouquetId());
+        b.setName(bouquet.getName());
+        b.setType(bouquet.getType());
+        b.setDescription(bouquet.getDescription());
+        b.setFlowerCount(bouquet.getFlowerCount());
+        b.setPricePerFlowerUah(bouquet.getPricePerFlowerUah());
+        b.setImageUrl(bouquet.getImageUrl());
+        if (bouquet instanceof RoseBouquet) {
+            RoseBouquet rb = (RoseBouquet)bouquet;
+            b.setRoseLength(rb.getRoseLength());
+        }
+        if (bouquet instanceof LilyBouquet) {
+            LilyBouquet lb = (LilyBouquet) bouquet;
+            b.setClosedFlowerCount(lb.getClosedFlowerCount());
+        }
+        return b;
+    }
+
     public Bouquet convertToBouquet() {
         switch (type) {
             case "rose":
@@ -26,7 +47,7 @@ public class BouquetData {
             case "tulip":
             case "iris":
                 return new Bouquet(bouquetId, name, type, description, flowerCount, pricePerFlowerUah, imageUrl);
-            default: throw new UnknownBouquetException(type);
+            default: throw new UnknownBouquetTypeException(type);
         }
     }
 

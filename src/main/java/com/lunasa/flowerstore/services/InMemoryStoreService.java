@@ -1,12 +1,17 @@
 package com.lunasa.flowerstore.services;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.lunasa.flowerstore.exceptions.NoCartException;
 import com.lunasa.flowerstore.exceptions.UnknownBouquetException;
 import com.lunasa.flowerstore.models.Bouquet;
+import com.lunasa.flowerstore.models.BouquetData;
 import com.lunasa.flowerstore.models.BouquetSupply;
 import com.lunasa.flowerstore.models.UserCart;
 
-import java.lang.reflect.Array;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +33,22 @@ public class InMemoryStoreService implements StoreService {
     @Override
     public List<Bouquet> getAllBouquets() {
         return bouquetService.getAllBouquets();
+    }
+
+    @Override
+    public void exportAllBouquets(String fileName) throws IOException {
+        try (Writer writer = new FileWriter(fileName)) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            List<Bouquet> bouquets = bouquetService.getAllBouquets();
+            // Need to convert to BouquetData to include all variables in Rose and Lily Bouquets
+            List<BouquetData> data = new ArrayList<>();
+            for (int i = 0; i < bouquets.size(); i++) {
+                Bouquet b = bouquets.get(i);
+                BouquetData d = BouquetData.convertFromBouquet(b);
+                data.add(d);
+            }
+            gson.toJson(data, writer);
+        }
     }
 
     @Override

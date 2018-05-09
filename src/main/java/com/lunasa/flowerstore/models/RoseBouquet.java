@@ -10,6 +10,10 @@ public class RoseBouquet extends Bouquet {
         this.roseLength = roseLength;
     }
 
+    public String getRoseLength() {
+        return roseLength;
+    }
+
     @Override
     public int calculatePriceUah() {
         if (roseLength.equals("long")) {

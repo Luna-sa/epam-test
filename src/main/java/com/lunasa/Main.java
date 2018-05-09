@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
 //        runTask1_1();
 //        runTask1_2();
-//        runTask2();
+        runTask2();
 //        runTask3_and_4_1();
 //        runTask3_and_4_2();
     }

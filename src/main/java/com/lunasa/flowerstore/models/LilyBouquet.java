@@ -10,6 +10,10 @@ public class LilyBouquet extends Bouquet {
         this.closedFlowerCount = closedFlowerCount;
     }
 
+    public int getClosedFlowerCount() {
+        return closedFlowerCount;
+    }
+
     @Override
     public int calculatePriceUah() {
         int openedFlowerCount = flowerCount - closedFlowerCount;
